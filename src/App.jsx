@@ -30,7 +30,7 @@ export default function App() {
           GSAP ✖︎ ぷよ
         </h1>
       </header>
-      <main className="w-full px-5 flex-1 flex flex-col gap-2">
+      <main className="w-full md:w-150 px-5 flex-1 flex flex-col gap-2">
 
         <AnimRow
           img_src={'./img/puyo_red.png'}
