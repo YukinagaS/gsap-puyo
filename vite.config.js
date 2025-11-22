@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base:'/gsap-puyo',
+  base:'/gsap-puyo/',
 })
