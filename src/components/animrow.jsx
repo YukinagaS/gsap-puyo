@@ -4,12 +4,12 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(useGSAP);
 
-export default function AnimRow({ img_src, container, title, animation }) {
+export default function AnimRow({ img_src, windowWidth, container, title, animation }) {
 
   const target = useRef();
 
   useGSAP(() => {
-    animation(target.current)
+    animation(target.current, windowWidth)
   }, {scope: container})
 
   return (

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import AnimRow from './components/animrow';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -10,6 +10,7 @@ import {
 gsap.registerPlugin(useGSAP);
 
 export default function App() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const container = useRef();
 
   // Undulation animation
@@ -23,6 +24,19 @@ export default function App() {
       })
   })
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center">
       <header className="my-4">
@@ -30,20 +44,19 @@ export default function App() {
           GSAP ✖︎ ぷよ
         </h1>
       </header>
-      <main className="w-full md:w-150 px-5 flex-1 flex flex-col gap-2">
-
+      <main className="w-full px-5 flex-1 flex flex-col gap-2">
+        <h2>Current: {windowWidth}</h2>
+        <h2>Small: {40/16}</h2>
+        <h2>Medium: {48/16}</h2>
+        <h2>Large: {64/16}</h2>
+        <h2>XLarge: {80/16}</h2>
+        <h2>XXLarge: {96/16}</h2>
         <AnimRow
           img_src={'./img/puyo_red.png'}
+          screenWidth={windowWidth}
           container={container}
           title="gsap.to(x:300)"
           animation={transformX}
-        />
-
-        <AnimRow
-          img_src={'./img/puyo_blue.png'}
-          container={container}
-          title="gsap.from(x:300)"
-          animation={fromTest}
         />
 
       </main>
